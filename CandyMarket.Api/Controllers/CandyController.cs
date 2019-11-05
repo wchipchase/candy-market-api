@@ -29,9 +29,10 @@ namespace CandyMarket.Api.Controllers
         }
 
         [HttpGet("{candyId}")]
-        public Candy Get(Guid candyId)
+        public Candy Get(int candyId)
         {
-            return _repo.GetAllCandy().FirstOrDefault(candy => candy.Id == candyId);
+            var candy1 = _repo.GetAllCandy().FirstOrDefault(candy => candy.Id == candyId);
+            return candy1;
         }
 
         [HttpPost]
@@ -41,13 +42,13 @@ namespace CandyMarket.Api.Controllers
         }
 
         [HttpDelete("{candyIdToDelete}/eat")]
-        public void Delete(Guid candyIdToDelete)
+        public void Delete(int candyIdToDelete)
         {
             _repo.EatCandy(candyIdToDelete);
         }
 
-        [HttpDelete("{candyIdToDonate}/donate")]
-        public void Donate(Guid candyIdToDonate)
+        [HttpPut("{candyIdToDonate}/donate")]
+        public void Donate(int candyIdToDonate)
         {
             // todo: make this endpoint behave less greedy and more honest
             _repo.EatCandy(candyIdToDonate);
